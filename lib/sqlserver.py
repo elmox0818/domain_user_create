@@ -6,7 +6,7 @@ import pandas as pd
 
 def ExecuteQueryBySQLServer(sql):
     con = pyodbc.connect(
-        r'DRIVER={SQL Server};SERVER=violet;DATABASE=KOA;UID=koa;PWD=koamgr;')
+        r'DRIVER={SQL Server};SERVER=hoge;DATABASE=fuga;UID=foo;PWD=hogehoge;')
     cur = con.cursor()
     cur.execute(sql)
     con.commit()
@@ -15,7 +15,7 @@ def ExecuteQueryBySQLServer(sql):
 
 def ReadQueryBySQLServer(sql):
     con = pyodbc.connect(
-        r'DRIVER={SQL Server};SERVER=violet;DATABASE=KOA;UID=koa;PWD=koamgr;')
+        r'DRIVER={SQL Server};SERVER=hoge;DATABASE=fuga;UID=foo;PWD=hogehoge;')
     df = pd.io.sql.read_sql(sql, con)
     con.close()
     return(df)

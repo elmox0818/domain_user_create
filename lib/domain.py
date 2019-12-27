@@ -6,17 +6,17 @@ import subprocess
 def user_add(userInfo):
     # define the server
     # define an unsecure LDAP server, requesting info on DSE and schema
-    s = Server('LDAP://trnts1.ted.ntsa.kubota.co.jp',
+    s = Server('LDAP://hogehoge',
                use_ssl=True, get_info=ALL)
 
     # define the connection
     try:
-        c = Connection(s, user='tractor\\administrator',
-                       password='rotcart', authentication=NTLM, auto_bind=True)
+        c = Connection(s, user='foofoo',
+                       password='fugafuga', authentication=NTLM, auto_bind=True)
         print(c.extend.standard.who_am_i())
         c.add(
             # ここのcnが一覧に出てくる名前
-            'cn={},ou=NewUsers,dc=ted,dc=ntsa,dc=kubota,dc=co,dc=jp'.format(
+            'cn={},ou=NewUsers,dc=hoge,dc=fuga,dc=foo,dc=co,dc=jp'.format(
                 userInfo['cn']),
             attributes={
                 'objectClass': [
@@ -39,15 +39,6 @@ def user_add(userInfo):
                 'userAccountControl': 66048
             }
         )
-        """
-        # パスワードの設定がSSL通信ができていないと無理？
-        userdn = 'cn={},ou=車両技術統括部,dc=ted,dc=ntsa,dc=kubota,dc=co,dc=jp'.format(
-            name_sample)
-        c.extend.microsoft.modify_password(
-            userdn,
-            'testpass123',
-        )
-        """
         print(c.result)
         # close the connection
         c.unbind()
@@ -56,10 +47,10 @@ def user_add(userInfo):
 
 
 def user_search():
-    search_base = 'DC=ted,DC=ntsa,DC=kubota,DC=co,DC=jp',
-    server = Server('LDAP://trnts1.ted.ntsa.kubota.co.jp', get_info=ALL)
-    conn = Connection(server, user='tractor\\administrator',
-                      password='rotcart', authentication=NTLM, auto_bind=True)
+    search_base = 'DC=hoge,DC=fuga,DC=foo,DC=co,DC=jp',
+    server = Server('LDAP://hogehoge', get_info=ALL)
+    conn = Connection(server, user='fugafuga',
+                      password='foofoo', authentication=NTLM, auto_bind=True)
     print(conn.extend.standard.who_am_i())
     conn.search(search_base,
                 '(&(|(objectclass=user)(objectclass=person)(objectclass=inetOrgPerson)(objectclass=organizationalPerson))(!(objectclass=computer)))',
